@@ -27,6 +27,10 @@ class AbstractRepository(ABC):
     async def find_filter():
         raise NotImplementedError
 
+    @abstractmethod
+    async def find_count():
+        raise NotImplementedError
+
     
 
 
@@ -93,6 +97,20 @@ class SQLAlchemyRepository(AbstractRepository):
             res = await session.execute(stmt)
             res = [row[0].to_read_model() for row in res.all()]
             return res
+
+
+
+    async def find_count(self):
+        async with async_session_maker() as session:  
+            query = (
+                select(
+                    func.count()
+                )
+                .select_from(self.model)
+            )
+
+            res = await session.execute(query)
+            return res.all()
         
     
 

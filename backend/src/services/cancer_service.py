@@ -38,3 +38,35 @@ class CancerServices:
 
         history_id = await self.cancer_repo.add_one(history_cancer)
         return history_id[0]
+
+    async def get_cancer_by_days(self,days: int):
+
+        history_cancer = await self.cancer_repo.find_all()
+
+        res_cancer = []
+        for cancer in history_cancer:
+            now_time = datetime.now()
+            deadline: timedelta = cancer.created_date + timedelta(days=days)
+            if deadline > now_time:
+                res_cancer.append(cancer)
+        
+        return res_cancer
+
+    async def get_cancer_by_user_id(self,days: int):
+
+        history_cancer = await self.cancer_repo.find_all()
+
+        res_cancer = []
+        for cancer in history_cancer:
+            now_time = datetime.now()
+            deadline: timedelta = cancer.created_date + timedelta(days=days)
+            if deadline > now_time:
+                res_cancer.append(cancer)
+        
+        return res_cancer
+
+    async def get_all_history_cancer(self):
+
+        cancers = await self.cancer_repo.find_all()
+
+        return cancers
