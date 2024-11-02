@@ -10,12 +10,12 @@ import HeaderAuth from '../components/header/header_auth';
 
 
 
-const Auth = () => {
+const Registr = () => {
 
 
   
   const onFinish = (values) => {
-    CheckUserAuth(values['email'],values['password'])
+    CheckUserRegistr(values['email'],values['password'],values['username'])
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -29,30 +29,35 @@ const Auth = () => {
     navigate('/')
   }
 
-  const redirect_register = () => {
-    navigate('/register')
+  const redirect_auth = () => {
+    navigate('/auth')
   }
 
-  const [authstatus, setAuthstatus] = useState(false)
-  const [AuthRequest, setAuthRequest] = useState(0)
   
-  function CheckUserAuth(email_user,password_user) {
+
+  
+  function CheckUserRegistr(email_user,password_user,username_user) {
     const params = new URLSearchParams();
-    params.append('username', email_user);
+    params.append('email', email_user);
     params.append('password', password_user);
     
     axios.post(
-      'http://127.0.0.1:8000/auth/jwt/login', 
-      params,
+      'http://127.0.0.1:8000/auth/register', {
+        'email' : email_user,
+        'password': password_user,
+        'username': username_user,
+      },
       { withCredentials: true }
       ).then(
         r =>  {
-          if (r.status == 204){
-            return(redirect_home())
+          console.log(r)
+          if (r.status == 201){
+            return(redirect_auth())
           }
         }
       ).catch((error) => {
-          alert('Неправильное имя пользователя или пароль')
+          console.log(error)
+          alert('Пользователь с таки email уже существует')
         }
       )
     
@@ -86,12 +91,27 @@ const Auth = () => {
             label="email"
             name="email"
             id='email'
-            className='text_auth'
             
             rules={[
               {
                 required: true,
                 message: 'Please input your email!',
+              },
+            
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="username"
+            name="username"
+            id='username'
+            
+            rules={[
+              {
+                required: true,
+                message: 'Please input your username!',
               },
             
             ]}
@@ -114,8 +134,6 @@ const Auth = () => {
             <Input.Password />
           </Form.Item>
 
-
-
           <Form.Item
             wrapperCol={{
               offset: 8,
@@ -126,21 +144,11 @@ const Auth = () => {
               Submit
             </Button>
           </Form.Item>
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="link" htmlType="link" onClick={redirect_register}>
-              Создать аккаунт
-            </Button>
-          </Form.Item>
+          
         </Form>
-      
       </div>
     </div>
 
   )
 };
-export default Auth;
+export default Registr;

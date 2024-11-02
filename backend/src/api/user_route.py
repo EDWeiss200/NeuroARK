@@ -18,3 +18,10 @@ async def get_user_by_id(
 ):
     user = await user_service.get_user_by_id(user.id)
     return user
+
+
+@router.get('/check')
+async def check_current_user(
+    user: User = Depends(current_user)
+):
+    return user.id

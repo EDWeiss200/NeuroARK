@@ -8,7 +8,7 @@ const { Dragger } = Upload;
 
 const props = {
     name: 'file',
-    multiple: true,
+    
     // запрос
     action: 'https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload',
     onChange(info) {
