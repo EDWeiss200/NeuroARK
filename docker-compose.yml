@@ -24,8 +24,6 @@ services:
       - .:/backend
     ports:
       - 8008:8000
-    environment:
-      - DATABASE_URL=postgresql://postgres:12345@db:5432/neuro-ark
     depends_on:
       - db
     networks:
@@ -34,14 +32,13 @@ services:
     image: postgres:15-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    expose:
-      - 5432
     environment:
-      - POSTGRES_USER = postgres
+      - POSTGRES_USER =postgres
       - POSTGRES_PASSWORD= 12345
-      - POSTGRES_DB= neuro-ark
-      - POSTGRES_HOST =  0.0.0.0
-    
+      - POSTGRES_DB=neuro-ark
+    ports:
+      - localhost:5432
+    restart: always
     networks:
       - dev
     
