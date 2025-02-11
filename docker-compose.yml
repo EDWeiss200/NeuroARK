@@ -36,8 +36,6 @@ services:
       - POSTGRES_USER = postgres
       - POSTGRES_PASSWORD= 12345
       - POSTGRES_DB=neuro-ark
-    ports:
-      - 127.0.0.1:5432
     restart: always
     networks:
       - dev
