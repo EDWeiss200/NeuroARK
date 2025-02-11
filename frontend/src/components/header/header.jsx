@@ -67,7 +67,7 @@ function Header() {
                 <div className="header_div">
                     <a href="" className='header_title'>
                         <div className='header_title-item'>
-                            NCCheck
+                            NSCheck
                         </div>
                     </a>
                     <div className="header_nav">

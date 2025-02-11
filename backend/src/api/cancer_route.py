@@ -19,9 +19,9 @@ async def send_photo(
     cancer_service: CancerServices = Depends(cancer_service)
 ):
 
-    history_id = await cancer_service.upload_photo(file,user.id)
-    print(history_id)
-    return history_id
+    result = await cancer_service.upload_photo(file,user.id)
+    print(result)
+    return result
 
 
 @router.get('/days/{days}')

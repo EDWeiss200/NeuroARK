@@ -3,6 +3,7 @@ from fastapi import UploadFile
 from random import randint
 import os
 from datetime import *
+from utils.neuro.neuro_ark import neuro_check
 
 class CancerServices:
 
@@ -19,15 +20,15 @@ class CancerServices:
         with open(x, "wb") as file_object:
             file_object.write(file.file.read())
         #result = neural_get_answer(x)
-        result = randint(0,1)
+        result = await neuro_check(x)
         os.remove(x)
-        print(result)
-        if result == 1:
+        return result
+        """if result == 1:
             cancer_id = await self.add_history_cancer(user_id)
             return cancer_id
         else:
             return result
-
+        """
 
     async def add_history_cancer(self,user_id):
         
