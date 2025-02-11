@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 import tensorflow as tf
 
 # 1. Загрузка сохраненной модели
-model_path = 'neuro/TheBest97.h5'  # Убедитесь, что путь корректен
+model_path = 'TheBest97.h5'  # Убедитесь, что путь корректен
 if not os.path.exists(model_path):
     raise FileNotFoundError(f"Модель не найдена по пути: {model_path}")
 
