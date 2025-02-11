@@ -33,11 +33,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER =postgres
+      - POSTGRES_USER = postgres
       - POSTGRES_PASSWORD= 12345
       - POSTGRES_DB=neuro-ark
     ports:
-      - localhost:5432
+      - 127.0.0.1:5432
     restart: always
     networks:
       - dev
