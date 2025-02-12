@@ -15,7 +15,7 @@ from pwdlib.hashers.argon2 import Argon2Hasher
 
 
 
-cookie_transport = CookieTransport(cookie_name="neuro-ark-cookie",cookie_max_age=28800,cookie_secure=True,cookie_samesite='None')
+cookie_transport = CookieTransport(cookie_name="neuro-ark-cookie",cookie_max_age=28800,cookie_secure=False, cookie_samesite='Lax')
 
 
 
