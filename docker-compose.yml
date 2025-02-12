@@ -31,16 +31,28 @@ services:
     networks:
       - dev
   db:
-    image: postgres:15-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    expose:
-      - 5432
+    version: "3.9"
+    image: postgres:14.8-alpine3.18
     environment:
-      - POSTGRES_USER = postgres
-      - POSTGRES_PASSWORD = 12345
-      - POSTGRES_DB = neuro-ark
-      - POSTGRES_HOST = 172.20.0.3
+      POSTGRES_DB: "neuro-ark"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "12345"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ../2. Init Database:/docker-entrypoint-initdb.d
+      - habrdb-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U habrpguser -d habrdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+    volumes:
+      habrdb-data:
     
     networks:
       - dev
