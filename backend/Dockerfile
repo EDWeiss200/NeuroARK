@@ -1,23 +1,28 @@
-FROM python:3.11.1-slim
 
+FROM python:3.11-slim
 
+        # Установите Git и Git LFS
 RUN apt-get update && apt-get install -y git git-lfs
 
         # Инициализируйте Git LFS
 RUN git lfs install
 
-# set work directory
-WORKDIR /src
+        # Создайте и перейдите в директорию приложения
 
-# set env variables
+
+                # set env variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# install dependencies
+
+        # Скопируйте файлы зависимостей
 COPY requirements.txt .
+
+        # Установите зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy project
+        # Скопируйте остальной код приложения
 COPY . .
 
+        # Скачайте файлы LFS (ВАЖНО!)
 RUN git lfs pull
