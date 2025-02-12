@@ -26,7 +26,7 @@ function Header() {
     const clickStatus = () =>{
         if (status == 'Выйти'){
             axios.post(
-                'http://127.0.0.1:8000/auth/jwt/logout',
+                'http://213.171.15.163/api/auth/jwt/logout',
                 { withCredentials: true }
                 ).then( r=> {
                     console.log(r)
@@ -47,7 +47,7 @@ function Header() {
 
     const checkStatus = () =>{
         axios.get(
-            'http://127.0.0.1:8000/users/check',
+            'http://213.171.15.163/api/users/check',
             { withCredentials: true }
             ).then( r => {
                 console.log(r)
