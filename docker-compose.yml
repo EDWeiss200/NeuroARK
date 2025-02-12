@@ -31,7 +31,6 @@ services:
     networks:
       - dev
   db:
-    version: "3.9"
     image: postgres:14.8-alpine3.18
     environment:
       POSTGRES_DB: "neuro-ark"
@@ -44,7 +43,7 @@ services:
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U habrpguser -d habrdb"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d neuro-ark"]
       interval: 10s
       timeout: 5s
       retries: 5
