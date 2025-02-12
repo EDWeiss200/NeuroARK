@@ -64,4 +64,3 @@ app.include_router(cancer_router)
 
 
 
-uvicorn.run(app)
