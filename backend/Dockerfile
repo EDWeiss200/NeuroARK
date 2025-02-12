@@ -4,9 +4,11 @@ FROM python:3.11-slim-buster
 WORKDIR /app  # Или другое подходящее место
 
     # Копируем зависимости (requirements.txt)
-COPY requirements.txt .
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-    # Устанавливаем зависимости
+# install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
     # Устанавливаем Git и Git LFS (если еще не установлены)
@@ -23,3 +25,8 @@ RUN git lfs pull
 
     # Теперь копируем код приложения в WORKDIR
 COPY src/ /app/src
+
+
+
+
+
