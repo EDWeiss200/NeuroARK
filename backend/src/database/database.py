@@ -2,7 +2,7 @@ from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from config import DATABASE_URL_CONFIG
 
-DATABASE_URL = DATABASE_URL_CONFIG
+DATABASE_URL = r'postgresql://postgres:12345@db:5432/neuro-ark'
 
 
 engine = create_async_engine(DATABASE_URL)
