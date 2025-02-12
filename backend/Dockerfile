@@ -9,7 +9,7 @@ RUN git lfs install
 
         # Создайте и перейдите в директорию приложения
 
-
+WORKDIR /src
                 # set env variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
