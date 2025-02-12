@@ -1,8 +1,5 @@
 FROM python:3.11.1-slim
-
-RUN apt-get update && apt-get install -y git git-lfs
-        # Инициализируйте Git LFS
-RUN git lfs install
+    # Инициализируйте Git LFS
 
 # set work directory
 WORKDIR /src
@@ -18,5 +15,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # copy project
 COPY . .
 
-RUN git lfs pull
 
