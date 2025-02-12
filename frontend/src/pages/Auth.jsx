@@ -42,7 +42,7 @@ const Auth = () => {
     params.append('password', password_user);
     
     axios.post(
-      'http://127.0.0.1:8000/auth/jwt/login', 
+      'http://213.171.15.163/api/auth/jwt/login', 
       params,
       { withCredentials: true }
       ).then(

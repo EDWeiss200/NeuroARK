@@ -42,7 +42,7 @@ const Registr = () => {
     params.append('password', password_user);
     
     axios.post(
-      'http://127.0.0.1:8000/auth/register', {
+      'http://213.171.15.163/api/auth/register', {
         'email' : email_user,
         'password': password_user,
         'username': username_user,
