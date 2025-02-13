@@ -109,6 +109,8 @@
     position: relative;
   }
 
+
+
   .close {
     position: absolute;
     top: 0;
@@ -126,4 +128,15 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .custom-modal .ant-modal {
+    top: 50%;
+    transform: translateY(-50%); /* Точное вертикальное центрирование */
+    border-radius: 0; /* Убираем скругление углов всего модального окна */
+  }
+  
+  /* Дополнительные стили для ширины и т.д. */
+  .custom-modal .ant-modal-content {
+      border-radius: 0; /*  Убираем скругление углов контента */
   }

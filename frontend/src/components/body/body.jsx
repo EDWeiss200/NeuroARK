@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { Button } from 'antd';
+import { Button, Upload, message, Modal } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
-import '../body/body.css';
-import { message, Upload, Modal } from 'antd';
+import './Modal.css'; // Подключите файл стилей, если он у вас есть
 
 const { Dragger } = Upload;
 
@@ -36,25 +34,25 @@ function Body() {
                 try {
                     const responseData = info.file.response;
 
-                    if (responseData?.message) {  // безопасный доступ к свойству message
+                    if (responseData?.message) {
                         message.success(`${info.file.name} file uploaded successfully.`);
-                        showModal(responseData.message); // Покажем модальное окно с сообщением сервера
+                        showModal(responseData.message);
                     } else {
                         message.success(`${info.file.name} file uploaded successfully.`);
                         showModal(responseData.message);
                     }
 
-                    if (responseData?.data) { // безопасный доступ к свойству data
+                    if (responseData?.data) {
                         console.log('Server data:', responseData.data);
                     }
                 } catch (error) {
                     console.error('Error parsing JSON response:', error);
                     message.error(`${info.file.name} file upload failed to parse server response.`);
-                    showModal("Ошибка разбора ответа сервера.");  // Покажем модальное окно об ошибке
+                    showModal("Ошибка разбора ответа сервера.");
                 }
             } else if (status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
-                showModal("Ошибка загрузки файла."); // Покажем модальное окно об ошибке
+                showModal("Ошибка загрузки файла.");
             }
         },
         onDrop(e) {
@@ -70,8 +68,8 @@ function Body() {
                         <div className="h_div">
                             Проверка онкологии нейросетью
                         </div>
-                        <div className="p_div">
-                            отправте нам фотографию с потенциальным заболеванием и наш искусственный интелект даст ответ
+                        <div className="p_div"></div>
+                        Отправьте нам фотографию с потенциальным заболеванием, и наш искусственный интеллект даст ответ.
                         </div>
                     </div>
                     <div className="send_image_div">
@@ -83,21 +81,28 @@ function Body() {
                                 <p className="ant-upload-text">Нажмите или перетащите файл в эту область для загрузки</p>
                             </Dragger>
                             <Modal
-                            title="Сообщение от сервера"
-                            visible={modalVisible}
-                            onOk={hideModal}
-                            onCancel={hideModal}
-                            style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translate(-50%, -20%)', zIndex: 1000 }}
-                          >
-                            {console.log("Modal visible:", modalVisible, "Content:", modalContent)}
-                            <p>{modalContent}</p>
-                          </Modal>
+                                title="Сообщение от сервера"
+                                open={modalVisible} // Заменил visible на open
+                                onOk={hideModal}
+                                // onCancel={hideModal}  // Удалили onCancel
+                                closable={false} // Убираем крестик (если нужно)
+                                footer={[  // Настраиваем нижний колонтитул
+                                    <Button key="ok" type="primary" onClick={hideModal}>
+                                        Ок
+                                    </Button>,
+                                ]}
+                                style={{ top: '30%' }} // Центрируем по вертикали (приблизительно)
+                                bodyStyle={{ borderRadius: '0px' }} // Делаем углы контента квадратными
+                                maskClosable={false} // Запретить закрытие щелчком по маске
+                                className="custom-modal" // Добавим класс для стилизации
+                            >
+                                <p>{modalContent}</p>
+                            </Modal>
                         </div>
                     </div>
-                </div>
                 <div className="first_background"></div>
-            </section>
-        </>
+              </section>
+          </>
     );
 }
 
