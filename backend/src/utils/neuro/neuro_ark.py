@@ -5,6 +5,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 import tensorflow as tf
 
+
 # 1. Загрузка сохраненной модели
 model_path = 'utils/neuro/TheBest97.h5'  # Убедитесь, что путь корректен
 
@@ -24,15 +25,15 @@ def load_and_preprocess_image(img_path, target_size=(32, 32)):
     return img_array
 
 # Укажите путь к вашему изображению
-def neuro_check(image):
-    #user_image_path = image_path  # Замените на реальный путь
+def neuro_check(image: np.ndarray):  # Принимает NumPy array
+       #user_image_path = image_path  # Замените на реальный путь
     processed_image = image
 
-    # 3. Предсказание класса на основе изображения
+       # 3. Предсказание класса на основе изображения
     predictions = model.predict(processed_image)
     predicted_class = np.argmax(predictions, axis=1)
 
-    # Список названий классов (проверьте, что он совпадает с тем, что использовалось при обучении)
+       # Список названий классов (проверьте, что он совпадает с тем, что использовалось при обучении)
     class_names = ['class_0', 'class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6']  # Замените на реальные названия классов
 
     predicted_label = class_names[predicted_class[0]]
