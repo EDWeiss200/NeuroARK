@@ -37,10 +37,11 @@ function Body() {
                     const responseData = info.file.response;
 
                     if (responseData?.message) {  // безопасный доступ к свойству message
-                        message.success('${info.file.name} file uploaded successfully.');
+                        message.success(`${info.file.name} file uploaded successfully.`);
                         showModal(responseData.message); // Покажем модальное окно с сообщением сервера
                     } else {
-                        message.success('${info.file.name} file uploaded successfully.');
+                        message.success(`${info.file.name} file uploaded successfully.`);
+                        showModal(responseData.message);
                     }
 
                     if (responseData?.data) { // безопасный доступ к свойству data
@@ -48,11 +49,11 @@ function Body() {
                     }
                 } catch (error) {
                     console.error('Error parsing JSON response:', error);
-                    message.error('${info.file.name} file uploaded successfully, but failed to parse server response.');
+                    message.error(`${info.file.name} file upload failed to parse server response.`);
                     showModal("Ошибка разбора ответа сервера.");  // Покажем модальное окно об ошибке
                 }
             } else if (status === 'error') {
-                message.error('${info.file.name} file upload failed.');
+                message.error(`${info.file.name} file upload failed.`);
                 showModal("Ошибка загрузки файла."); // Покажем модальное окно об ошибке
             }
         },
@@ -82,13 +83,15 @@ function Body() {
                                 <p className="ant-upload-text">Нажмите или перетащите файл в эту область для загрузки</p>
                             </Dragger>
                             <Modal
-                                title="Сообщение от сервера"
-                                visible={modalVisible}
-                                onOk={hideModal}
-                                onCancel={hideModal}
-                            >
-                                <p>{modalContent}</p>
-                            </Modal>
+                            title="Сообщение от сервера"
+                            visible={modalVisible}
+                            onOk={hideModal}
+                            onCancel={hideModal}
+                            style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translate(-50%, -20%)', zIndex: 1000 }}
+                          >
+                            {console.log("Modal visible:", modalVisible, "Content:", modalContent)}
+                            <p>{modalContent}</p>
+                          </Modal>
                         </div>
                     </div>
                 </div>
