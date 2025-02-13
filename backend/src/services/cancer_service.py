@@ -20,7 +20,7 @@ class CancerServices:
         with open(x, "wb") as file_object:
             file_object.write(file.file.read())
         #result = neural_get_answer(x)
-        result = await neuro_check(x)
+        result = neuro_check(x)
         os.remove(x)
         return result
         
