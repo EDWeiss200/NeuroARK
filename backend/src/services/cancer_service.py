@@ -11,7 +11,7 @@ class CancerServices:
         self.cancer_repo: AbstractRepository = cancer_repo()
 
 
-    async def upload_photo(self,file: UploadFile,user_id):
+    async def upload_photo(self,file: UploadFile):
 
         filename = f'{file.filename}'
 
@@ -23,12 +23,7 @@ class CancerServices:
         result = await neuro_check(x)
         os.remove(x)
         return result
-        """if result == 1:
-            cancer_id = await self.add_history_cancer(user_id)
-            return cancer_id
-        else:
-            return result
-        """
+        
 
     async def add_history_cancer(self,user_id):
         

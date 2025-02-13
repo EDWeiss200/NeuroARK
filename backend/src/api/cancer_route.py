@@ -15,11 +15,10 @@ router = APIRouter(
 @router.post('/send_photo')
 async def send_photo(
     file: UploadFile,
-    user: User = Depends(current_user),
     cancer_service: CancerServices = Depends(cancer_service)
 ):
 
-    result = await cancer_service.upload_photo(file,user.id)
+    result = await cancer_service.upload_photo(file)
     print(result)
     return result
 

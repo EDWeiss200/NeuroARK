@@ -4,29 +4,27 @@ import { Button } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import '../body/body.css'
 import {  message, Upload } from 'antd';
-const { Dragger } = Upload;
 
+const { Dragger } = Upload;
 const props = {
-    name: 'file',
-    
-    // запрос
-    action: 'https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload',
-    onChange(info) {
-      const { status } = info.file;
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`);
-        // проверка
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-    onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
-    },
-  };
+  name: 'file',
+  multiple: true,
+  action: 'http://213.171.15.163/api/send_photo',
+  onChange(info) {
+    const { status } = info.file;
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+  onDrop(e) {
+    console.log('Dropped files', e.dataTransfer.files);
+  },
+};
 
 
 function Body() {
