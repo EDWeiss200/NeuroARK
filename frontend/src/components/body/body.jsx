@@ -3,9 +3,21 @@ import axios from 'axios';
 import { Button } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import '../body/body.css'
-import {  message, Upload } from 'antd';
+import {  message, Upload, Modal } from 'antd';
 
 const { Dragger } = Upload;
+const [modalVisible, setModalVisible] = useState(false);
+const [modalContent, setModalContent] = useState('');
+
+const showModal = (content) => {
+  setModalContent(content);
+  setModalVisible(true);
+};
+
+const hideModal = () => {
+  setModalVisible(false);
+  setModalContent('');
+};
 const props = {
   name: 'file',
   multiple: true,
@@ -45,6 +57,7 @@ const props = {
     console.log('Dropped files', e.dataTransfer.files);
   },
 };
+
 function Body() {
 
     return(
