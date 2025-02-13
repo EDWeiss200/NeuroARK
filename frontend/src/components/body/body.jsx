@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Upload, message, Modal } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
-import './Modal.css'; // Подключите файл стилей, если он у вас есть
+import '../body/body.css'; // Подключите файл стилей, если он у вас есть
 
 const { Dragger } = Upload;
 
