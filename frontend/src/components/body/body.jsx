@@ -9,7 +9,7 @@ const { Dragger } = Upload;
 const props = {
   name: 'file',
   multiple: true,
-  action: 'http://213.171.15.163/api/cancers/send_photo',
+  action: 'http://213.171.15.163/api/cansers/send_photo',
   onChange(info) {
     const { status } = info.file;
     if (status !== 'uploading') {
