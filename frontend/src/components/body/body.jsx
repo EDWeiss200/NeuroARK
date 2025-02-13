@@ -68,8 +68,8 @@ function Body() {
                         <div className="h_div">
                             Проверка онкологии нейросетью
                         </div>
-                        <div className="p_div"></div>
-                        Отправьте нам фотографию с потенциальным заболеванием, и наш искусственный интеллект даст ответ.
+                        <div className="p_div">
+                            Отправьте нам фотографию с потенциальным заболеванием, и наш искусственный интеллект даст ответ.
                         </div>
                     </div>
                     <div className="send_image_div">
@@ -82,28 +82,27 @@ function Body() {
                             </Dragger>
                             <Modal
                                 title="Сообщение от сервера"
-                                open={modalVisible} // Заменил visible на open
+                                open={modalVisible}
                                 onOk={hideModal}
-                                // onCancel={hideModal}  // Удалили onCancel
-                                closable={false} // Убираем крестик (если нужно)
-                                footer={[  // Настраиваем нижний колонтитул
+                                closable={false}
+                                footer={[
                                     <Button key="ok" type="primary" onClick={hideModal}>
                                         Ок
                                     </Button>,
                                 ]}
-                                style={{ top: '30%' }} // Центрируем по вертикали (приблизительно)
-                                bodyStyle={{ borderRadius: '0px' }} // Делаем углы контента квадратными
-                                maskClosable={false} // Запретить закрытие щелчком по маске
-                                className="custom-modal" // Добавим класс для стилизации
-                                >
+                                style={{ top: '30%' }}
+                                bodyStyle={{ borderRadius: '0px' }}
+                                maskClosable={false}
+                                className="custom-modal"
+                            >
                                 <p>{modalContent}</p>
                             </Modal>
                         </div>
-                      </div>
                     </div>
+                </div>
                 <div className="first_background"></div>
-              </section>
-          </>
+            </section>
+        </>
     );
 }
 
