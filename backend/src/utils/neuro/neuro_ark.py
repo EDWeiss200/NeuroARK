@@ -43,7 +43,7 @@ def neuro_check(image: Image.Image):
     predicted_class = np.argmax(predictions, axis=1)
 
     # Список названий классов (проверьте, что он совпадает с тем, что использовалось при обучении)
-    class_names = ['class_0', 'class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6']  # Замените на реальные названия классов
+    class_names = ['Актинический кератоз', 'Базальноклеточная карцинома', 'Доброкачественные кератозоподобные поражения', 'Дерматофиброма', 'Меланоцитарные невусы', 'Меланома', 'Сосудистые поражения']  # Замените на реальные названия классов
 
     predicted_label = class_names[predicted_class[0]]
     confidence = predictions[0][np.argmax(predictions, axis=1)[0]]  # Исправлено!

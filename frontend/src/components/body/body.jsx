@@ -39,7 +39,6 @@ function Body() {
                         showModal(responseData.message);
                     } else {
                         message.success(`${info.file.name} file uploaded successfully.`);
-                        console.log(responseData)
                         showModal(responseData);
                         
                     }
