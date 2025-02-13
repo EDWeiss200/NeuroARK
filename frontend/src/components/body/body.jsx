@@ -39,8 +39,8 @@ function Body() {
                         showModal(responseData.message);
                     } else {
                         message.success(`${info.file.name} file uploaded successfully.`);
-                        showModal(responseData.message);
-                        setModalContent(responseData.message)
+                        showModal(responseData.data);
+                        
                     }
 
                     if (responseData?.data) {
