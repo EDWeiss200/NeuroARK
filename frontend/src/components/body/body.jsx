@@ -95,10 +95,11 @@ function Body() {
                                 bodyStyle={{ borderRadius: '0px' }} // Делаем углы контента квадратными
                                 maskClosable={false} // Запретить закрытие щелчком по маске
                                 className="custom-modal" // Добавим класс для стилизации
-                            >
+                                >
                                 <p>{modalContent}</p>
                             </Modal>
                         </div>
+                      </div>
                     </div>
                 <div className="first_background"></div>
               </section>
