@@ -40,6 +40,7 @@ function Body() {
                     } else {
                         message.success(`${info.file.name} file uploaded successfully.`);
                         showModal(responseData.message);
+                        setModalContent(responseData.message)
                     }
 
                     if (responseData?.data) {
