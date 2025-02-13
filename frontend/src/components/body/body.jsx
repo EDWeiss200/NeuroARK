@@ -7,60 +7,62 @@ import {  message, Upload, Modal } from 'antd';
 import { useState } from 'react';
 
 const { Dragger } = Upload;
-const [modalVisible, setModalVisible] = useState(false);
-const [modalContent, setModalContent] = useState('');
 
-const showModal = (content) => {
-  setModalContent(content);
-  setModalVisible(true);
-};
 
-const hideModal = () => {
-  setModalVisible(false);
-  setModalContent('');
-};
-const props = {
-  name: 'file',
-  multiple: true,
-  action: 'http://213.171.15.163/api/cancers/send_photo',
-  onChange(info) {
-    const { status } = info.file;
-
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-
-    if (status === 'done') {
-      try {
-        const responseData = info.file.response;
-
-        if (responseData.message) {
-          message.success(`${info.file.name} file uploaded successfully.`);
-          showModal(responseData.message); // Покажем модальное окно с сообщением сервера
-        } else {
-          message.success(`${info.file.name} file uploaded successfully.`);
-        }
-
-        if (responseData.data) {
-          console.log('Server data:', responseData.data);
-        }
-      } catch (error) {
-        console.error('Error parsing JSON response:', error);
-        message.error(`${info.file.name} file uploaded successfully, but failed to parse server response.`);
-        showModal("Ошибка разбора ответа сервера.");  // Покажем модальное окно об ошибке
-      }
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-      showModal("Ошибка загрузки файла."); // Покажем модальное окно об ошибке
-    }
-  },
-  onDrop(e) {
-    console.log('Dropped files', e.dataTransfer.files);
-  },
-};
 
 function Body() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState('');
+  
+  const showModal = (content) => {
+    setModalContent(content);
+    setModalVisible(true);
+  };
+  
+  const hideModal = () => {
+    setModalVisible(false);
+    setModalContent('');
+  };
 
+  const props = {
+    name: 'file',
+    multiple: true,
+    action: 'http://213.171.15.163/api/cancers/send_photo',
+    onChange(info) {
+      const { status } = info.file;
+  
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+  
+      if (status === 'done') {
+        try {
+          const responseData = info.file.response;
+  
+          if (responseData.message) {
+            message.success(`${info.file.name} file uploaded successfully.`);
+            showModal(responseData.message); // Покажем модальное окно с сообщением сервера
+          } else {
+            message.success(`${info.file.name} file uploaded successfully.`);
+          }
+  
+          if (responseData.data) {
+            console.log('Server data:', responseData.data);
+          }
+        } catch (error) {
+          console.error('Error parsing JSON response:', error);
+          message.error(`${info.file.name} file uploaded successfully, but failed to parse server response.`);
+          showModal("Ошибка разбора ответа сервера.");  // Покажем модальное окно об ошибке
+        }
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+        showModal("Ошибка загрузки файла."); // Покажем модальное окно об ошибке
+      }
+    },
+    onDrop(e) {
+      console.log('Dropped files', e.dataTransfer.files);
+    },
+  };
     return(
         <>
             <section className='first'>
