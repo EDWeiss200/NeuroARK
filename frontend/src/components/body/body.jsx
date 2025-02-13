@@ -82,7 +82,7 @@ function Body() {
                                 <p className="ant-upload-text">Нажмите или перетащите файл в эту область для загрузки</p>
                             </Dragger>
                             <Modal
-                                title="Сообщение от сервера"
+                                title="Предположительная оценка"
                                 open={modalVisible}
                                 onOk={hideModal}
                                 closable={false}
@@ -97,6 +97,7 @@ function Body() {
                                 className="custom-modal"
                             >
                                 <p>{modalContent}</p>
+                                <p>Важно: Вердикт искусственного интеллекта не является диагнозом. Для точной диагностики обратитесь к специалисту</p>
                             </Modal>
                         </div>
                     </div>
