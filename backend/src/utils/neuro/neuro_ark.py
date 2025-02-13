@@ -24,9 +24,9 @@ def load_and_preprocess_image(img_path, target_size=(32, 32)):
     return img_array
 
 # Укажите путь к вашему изображению
-def neuro_check(image_path):
-    user_image_path = image_path  # Замените на реальный путь
-    processed_image = load_and_preprocess_image(user_image_path)
+def neuro_check(image):
+    #user_image_path = image_path  # Замените на реальный путь
+    processed_image = image
 
     # 3. Предсказание класса на основе изображения
     predictions = model.predict(processed_image)

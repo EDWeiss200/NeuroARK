@@ -2,8 +2,10 @@ from utils.repository import AbstractRepository
 from fastapi import UploadFile
 from random import randint
 import os
+import io
 from datetime import *
 from utils.neuro.neuro_ark import neuro_check
+from PIL import Image
 
 class CancerServices:
 
@@ -13,16 +15,10 @@ class CancerServices:
 
     async def upload_photo(self,file: UploadFile):
 
-        filename = f'{file.filename}'
+        contents = await file.read()
+        image = Image.open(io.BytesIO(contents)).convert("RGB")  # Открыть как RGB, если нужно
 
-        x = os.path.join(r'utils/neuro/txt_for_neuro', filename)
-
-
-        with open(x, "wb") as file_object:
-            file_object.write(file.file.read())
-        #result = neural_get_answer(x)
-        result = neuro_check(x)
-        os.remove(x)
+        result = neuro_check(image)
         return result
         
 
