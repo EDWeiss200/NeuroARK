@@ -37,10 +37,10 @@ function Body() {
                     const responseData = info.file.response;
 
                     if (responseData?.message) {  // безопасный доступ к свойству message
-                        message.success(${info.file.name} file uploaded successfully.);
+                        message.success('${info.file.name} file uploaded successfully.');
                         showModal(responseData.message); // Покажем модальное окно с сообщением сервера
                     } else {
-                        message.success(${info.file.name} file uploaded successfully.);
+                        message.success('${info.file.name} file uploaded successfully.');
                     }
 
                     if (responseData?.data) { // безопасный доступ к свойству data
@@ -48,11 +48,11 @@ function Body() {
                     }
                 } catch (error) {
                     console.error('Error parsing JSON response:', error);
-                    message.error(${info.file.name} file uploaded successfully, but failed to parse server response.);
+                    message.error('${info.file.name} file uploaded successfully, but failed to parse server response.');
                     showModal("Ошибка разбора ответа сервера.");  // Покажем модальное окно об ошибке
                 }
             } else if (status === 'error') {
-                message.error(${info.file.name} file upload failed.);
+                message.error('${info.file.name} file upload failed.');
                 showModal("Ошибка загрузки файла."); // Покажем модальное окно об ошибке
             }
         },
