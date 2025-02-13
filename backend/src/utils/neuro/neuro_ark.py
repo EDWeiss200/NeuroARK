@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 import tensorflow as tf
+from PIL import Image
 
 # 1. Загрузка сохраненной модели
 model_path = 'utils/neuro/TheBest97.h5'  # Убедитесь, что путь корректен
