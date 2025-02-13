@@ -12,11 +12,38 @@ const props = {
   action: 'http://213.171.15.163/api/cancers/send_photo',
   onChange(info) {
     const { status } = info.file;
+
     if (status !== 'uploading') {
       console.log(info.file, info.fileList);
     }
+
     if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`);
+      // Доступ к данным ответа сервера здесь
+      console.log('Server response:', info.file.response);
+
+      // Предполагая, что ваш сервер возвращает JSON
+      try {
+        const responseData = info.file.response;  // Сохраняем ответ в переменную
+
+        // Пример: если сервер возвращает { message: "Успех!", data: { id: 123, name: "Example" } }
+        if (responseData.message) {
+          message.success(`${info.file.name} file uploaded successfully. ${responseData.message}`);
+        } else {
+           message.success(`${info.file.name} file uploaded successfully.`);
+        }
+
+        if (responseData.data) {
+          // Здесь вы можете использовать данные, возвращенные сервером.
+          console.log('Server data:', responseData.data);
+          // Например, сохранить `responseData.data.id` в state компонента
+          // или передать его дальше.
+        }
+      } catch (error) {
+        console.error('Error parsing JSON response:', error);
+        message.error(`${info.file.name} file uploaded successfully, but failed to parse server response.`);
+      }
+
+
     } else if (status === 'error') {
       message.error(`${info.file.name} file upload failed.`);
     }
@@ -25,7 +52,6 @@ const props = {
     console.log('Dropped files', e.dataTransfer.files);
   },
 };
-
 
 function Body() {
 
