@@ -18,41 +18,33 @@ const props = {
     }
 
     if (status === 'done') {
-      // Доступ к данным ответа сервера здесь
-      console.log('Server response:', info.file.response);
-
-      // Предполагая, что ваш сервер возвращает JSON
       try {
-        const responseData = info.file.response;  // Сохраняем ответ в переменную
+        const responseData = info.file.response;
 
-        // Пример: если сервер возвращает { message: "Успех!", data: { id: 123, name: "Example" } }
         if (responseData.message) {
-          message.success(`${info.file.name} file uploaded successfully. ${responseData.message}`);
+          message.success(`${info.file.name} file uploaded successfully.`);
+          showModal(responseData.message); // Покажем модальное окно с сообщением сервера
         } else {
-           message.success(`${info.file.name} file uploaded successfully.`);
+          message.success(`${info.file.name} file uploaded successfully.`);
         }
 
         if (responseData.data) {
-          // Здесь вы можете использовать данные, возвращенные сервером.
           console.log('Server data:', responseData.data);
-          // Например, сохранить `responseData.data.id` в state компонента
-          // или передать его дальше.
         }
       } catch (error) {
         console.error('Error parsing JSON response:', error);
         message.error(`${info.file.name} file uploaded successfully, but failed to parse server response.`);
+        showModal("Ошибка разбора ответа сервера.");  // Покажем модальное окно об ошибке
       }
-
-
     } else if (status === 'error') {
       message.error(`${info.file.name} file upload failed.`);
+      showModal("Ошибка загрузки файла."); // Покажем модальное окно об ошибке
     }
   },
   onDrop(e) {
     console.log('Dropped files', e.dataTransfer.files);
   },
 };
-
 function Body() {
 
     return(
@@ -75,6 +67,14 @@ function Body() {
                                 </p>
                                 <p className="ant-upload-text">Нажмите или перетащите файл в эту область для загрузки</p>
                             </Dragger>
+                            <Modal
+                            title="Сообщение от сервера"
+                            visible={modalVisible}
+                            onOk={hideModal}
+                            onCancel={hideModal}
+                            >
+                            <p>{modalContent}</p>
+                          </Modal>
                         </div>
                     </div>
                 </div>
