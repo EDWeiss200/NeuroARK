@@ -6,7 +6,6 @@ import io
 from datetime import *
 from utils.neuro.neuro_ark import neuro_check
 from PIL import Image
-import numpy as np
 
 class CancerServices:
 
@@ -15,17 +14,13 @@ class CancerServices:
 
 
     async def upload_photo(self,file: UploadFile):
+
         contents = await file.read()
-        image = Image.open(io.BytesIO(contents)).convert("RGB")
+        image = Image.open(io.BytesIO(contents)).convert("RGB")  # Открыть как RGB, если нужно
 
-        # Предобработка изображения:
-        image = image.resize((224, 224))  #  ОБЯЗАТЕЛЬНО! Замените 224 на размер, который принимает ваша модель!
-        image = np.array(image)  # Преобразование в NumPy array
-        image = image / 255.0  # Нормализация (если ваша модель обучалась на нормализованных данных)
-        image = np.expand_dims(image, axis=0)  # Добавление размерности пакета (важно для большинства моделей Keras/TensorFlow)
-
-        result = neuro_check(image)  # neuro_check теперь получает NumPy array
+        result = neuro_check(image)
         return result
+        
 
     async def add_history_cancer(self,user_id):
         

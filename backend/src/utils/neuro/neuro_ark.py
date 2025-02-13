@@ -1,10 +1,10 @@
 import os
 import numpy as np
+from tensorflow import keras
 import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 import tensorflow as tf
-
 
 # 1. Загрузка сохраненной модели
 model_path = 'utils/neuro/TheBest97.h5'  # Убедитесь, что путь корректен
@@ -25,19 +25,27 @@ def load_and_preprocess_image(img_path, target_size=(32, 32)):
     return img_array
 
 # Укажите путь к вашему изображению
-def neuro_check(image: np.ndarray):  # Принимает NumPy array
-       #user_image_path = image_path  # Замените на реальный путь
-    processed_image = image
+def neuro_check(image: Image.Image):
+    """
+    Принимает изображение (PIL.Image.Image), выполняет предобработку и предсказывает класс.
+    """
 
-       # 3. Предсказание класса на основе изображения
-    predictions = model.predict(processed_image)
+    # Предобработка изображения (адаптировано из load_and_preprocess_image):
+    target_size = (32, 32) # Теперь мы точно знаем размер!
+    img = image.resize(target_size)
+    img_array = keras.utils.img_to_array(img) # преобразует PIL image в numpy array
+    img_array = np.expand_dims(img_array, axis=0)  # Добавляем размерность пакета (batch size)
+    img_array = img_array / 255.0  # Нормализация
+
+    # 3. Предсказание класса на основе изображения
+    predictions = model.predict(img_array)
     predicted_class = np.argmax(predictions, axis=1)
 
-       # Список названий классов (проверьте, что он совпадает с тем, что использовалось при обучении)
+    # Список названий классов (проверьте, что он совпадает с тем, что использовалось при обучении)
     class_names = ['class_0', 'class_1', 'class_2', 'class_3', 'class_4', 'class_5', 'class_6']  # Замените на реальные названия классов
 
     predicted_label = class_names[predicted_class[0]]
-    confidence = predictions[0][predicted_class[0]]
+    confidence = predictions[0][np.argmax(predictions, axis=1)[0]]  # Исправлено!
 
     return f"Предсказанный класс: {predicted_label} с уверенностью {confidence*100:.2f}%"
 
