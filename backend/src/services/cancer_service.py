@@ -15,8 +15,8 @@ class CancerServices:
 
         filename = f'{file.filename}'
 
-        x = os.path.join(r'backend\src\services\txt_for_neuro', filename)
-        return x
+        x = os.path.join(r'backend/src/services/txt_for_neuro', filename)
+
 
         with open(x, "wb") as file_object:
             file_object.write(file.file.read())
