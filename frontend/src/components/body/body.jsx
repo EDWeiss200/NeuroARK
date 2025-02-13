@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import '../body/body.css'
 import {  message, Upload, Modal } from 'antd';
+import { useState } from 'react';
 
 const { Dragger } = Upload;
 const [modalVisible, setModalVisible] = useState(false);
