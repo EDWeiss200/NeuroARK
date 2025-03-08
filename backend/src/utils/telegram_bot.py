@@ -5,7 +5,7 @@ import io
 # Assuming neuro_ark.py is in a subdirectory named 'neuro'
 from neuro.neuro_ark import neuro_check  # Corrected import
 
-API_KEY = '8109035980:AAHEEvg4sQWJvhybnFMZzYhB9GzzvBczAMk'  # Replace with your actual API key
+API_KEY = 'API_TOKEN'  # Replace with your actual API key
 
 bot = TeleBot(API_KEY)
 
