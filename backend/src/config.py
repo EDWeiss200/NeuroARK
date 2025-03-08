@@ -13,4 +13,4 @@ DB_PORT = os.environ.get("DB_PORT")
 SECRET_AUTH = os.environ.get("SECRET_AUTH")
 SECRET_USER_MANAGER = os.environ.get("SECRET_USER_MANAGER")
 
-DATABASE_URL_CONFIG = f"postgresql+asyncpg://postgres:12345@db:5432/neuro-ark"
+DATABASE_URL_CONFIG = f"postgresql+asyncpg://postgres:123456@db:5432/neuro-ark"
