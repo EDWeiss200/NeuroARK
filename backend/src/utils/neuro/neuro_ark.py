@@ -8,7 +8,7 @@ import tensorflow as tf
 from PIL import Image
 
 # 1. Загрузка сохраненной модели
-model_path = 'utils/neuro/TheBest97.h5'  # Убедитесь, что путь корректен
+model_path = 'utils/neuro/Test2.h5'  # Убедитесь, что путь корректен
 #model_path = r'backend\src\utils\neuro\TheBest97.h5'
 
 model = load_model(model_path)
