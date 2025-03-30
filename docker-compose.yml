@@ -25,12 +25,16 @@ services:
           echo "Waiting for database...";
         done;
         echo "Database is ready!";
-        sleep 5; # Give the DB some extra time to fully initialize
         cd src;
         echo "Running Alembic migrations...";
-        alembic upgrade head;
-        echo "Starting Uvicorn...";
-        uvicorn main:app --host 0.0.0.0
+        alembic upgrade head
+        if [ $? -eq 0 ]; then
+          echo "Starting Uvicorn...";
+          uvicorn main:app --host 0.0.0.0
+        else
+          echo "Alembic migrations failed. Exiting."
+          exit 1
+        fi
       '
     environment:
       DATABASE_URL: postgresql+asyncpg://postgres:12345@db:5432/neuro-ark  # ВАЖНО: Установите DATABASE_URL
@@ -39,7 +43,8 @@ services:
     ports:
       - 8008:8000
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - dev
 
