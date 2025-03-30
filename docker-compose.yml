@@ -20,7 +20,8 @@ services:
   backend:
     build: ./backend
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; sleep 5 && cd src && echo 'Done' && alembic upgrade head && uvicorn main:app --host 0.0.0.0'
-
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:12345@db:5432/neuro-ark
     volumes:
       - .:/backend
     ports:
@@ -33,10 +34,10 @@ services:
     image: postgres:14.8-alpine3.18
     environment:
       POSTGRES_DB: "neuro-ark"
-      POSTGRES_HOST: "localhost"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "12345"
       PGDATA: "/var/lib/postgresql/data/pgdata"
+
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
