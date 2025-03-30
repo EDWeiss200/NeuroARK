@@ -2,6 +2,7 @@ version: '3.8'
 networks:
   dev:
 
+
 services:
   nginx:
     image: nginx:stable-alpine
@@ -18,47 +19,28 @@ services:
 
   backend:
     build: ./backend
-    command: >
-      bash -c '
-        while ! </dev/tcp/db/5432; do
-          sleep 1;
-          echo "Waiting for database...";
-        done;
-        echo "Database is ready!";
-        cd src;
-        echo "Running Alembic migrations...";
-        alembic upgrade head
-        if [ $? -eq 0 ]; then
-          echo "Starting Uvicorn...";
-          uvicorn main:app --host 0.0.0.0
-        else
-          echo "Alembic migrations failed. Exiting."
-          exit 1
-        fi
-      '
-    environment:
-      DATABASE_URL: postgresql+asyncpg://postgres:12345@db:5432/neuro-ark  # ВАЖНО: Установите DATABASE_URL
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; sleep 5 && cd src && echo 'Done' && alembic upgrade head && uvicorn main:app --host 0.0.0.0'
+
     volumes:
       - .:/backend
     ports:
       - 8008:8000
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     networks:
       - dev
-
   db:
     image: postgres:14.8-alpine3.18
     environment:
       POSTGRES_DB: "neuro-ark"
+      POSTGRES_HOST: "localhost"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "12345"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
-      - "5432:5432" #optional expose port - not necessary
+      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d neuro-ark"]
       interval: 10s
@@ -66,9 +48,11 @@ services:
       retries: 5
       start_period: 10s
     restart: unless-stopped
+    
     networks:
       - dev
-
+    
+  
   frontend:
     build:
       context: ./frontend
@@ -76,4 +60,4 @@ services:
       - dev
 
 volumes:
-  postgres_data:
+      postgres_data:
