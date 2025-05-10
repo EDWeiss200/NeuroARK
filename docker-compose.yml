@@ -19,7 +19,7 @@ services:
 
   backend:
     build: ./backend
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; sleep 5 && cd src && echo 'Done' && alembic upgrade head && uvicorn main:app --host 0.0.0.0'
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; sleep 5 && cd src && echo 'Done' && alembic upgrade head && uvicorn main:app --host 0.0.0.0 && python utils/telegram_bot.py'
 
     volumes:
       - .:/backend

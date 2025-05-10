@@ -7,6 +7,7 @@ import { redirect } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/header/header'
 import Body from '../components/body/body';
+import News from '../components/news/news';
 
 
 
@@ -16,6 +17,7 @@ const Home = () => {
         <>
           <Header/>
           <Body/>
+          <News/>
         </>
     )
 }

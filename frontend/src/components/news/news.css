@@ -1,0 +1,13 @@
+.news{
+    margin-top: 150px;
+    position: absolute;
+    left: 20%;
+    margin-bottom: 100px;
+    width: 100%;
+}
+.news_title{
+    font-size: 52px;
+}
+.news_list{
+    font-size: 120px;
+}
