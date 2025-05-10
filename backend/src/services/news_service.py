@@ -1,6 +1,6 @@
 from utils.news_parser import get_news
 
-class NewsService(self):
+class NewsService():
 
 
     async def get_news_cancer(self):
