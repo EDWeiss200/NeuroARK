@@ -11,3 +11,4 @@ uvicorn
 tensorflow
 matplotlib
 telebot
+BeautifulSoup
