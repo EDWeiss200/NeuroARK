@@ -8,11 +8,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.user_route import router as user_router
 from api.cancer_route import router as cancer_router
+from api.news_route import router as news_router
 
 
 
 app = FastAPI(
-    title='NeuroARK',
+    title='NSCheck',
 )
 
 
@@ -61,6 +62,7 @@ app.include_router(
 
 app.include_router(user_router)
 app.include_router(cancer_router)
+app.include_router(news_router)
 
 
 
